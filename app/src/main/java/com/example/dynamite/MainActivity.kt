@@ -1,4 +1,4 @@
-package com.yourdomain.yourapp;
+package com.example.dynamite;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity
