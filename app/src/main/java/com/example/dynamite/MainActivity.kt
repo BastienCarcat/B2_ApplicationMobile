@@ -6,15 +6,21 @@ import android.util.Log;
 import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.android.appremote.api.Connector;
 import com.spotify.android.appremote.api.SpotifyAppRemote;
-import com.spotify.protocol.types.PlaybackSpeed
 import com.spotify.protocol.types.Track;
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.coroutines.EmptyCoroutineContext.plus
+import android.view.animation.AnimationUtils
+import org.jmusixmatch.MusixMatch
+import org.jmusixmatch.entity.lyrics.Lyrics
+import androidx.core.app.ComponentActivity
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 
 class MainActivity : AppCompatActivity() {
 
     private val clientId = "111d8a20647a466cabf20bbb9363f347"
     private val redirectUri = "com.example.dynamite://callback"
+    var apiKey = "c31a28b6305998f504e30ac76e2d5354"
     private var spotifyAppRemote: SpotifyAppRemote? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,15 +49,46 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun connected() {
+        val musixMatch = MusixMatch(apiKey)
         spotifyAppRemote?.let {
-            val playlistURI = "spotify:playlist:37i9dQZF1DX2sUQwD7tbmL"
+            val playlistURI = "spotify:playlist:1UPPptBf3XiBT2qcTAJzw7"
             it.playerApi.play(playlistURI)
+            it.playerApi.toggleShuffle()
             it.playerApi.subscribeToPlayerState().setEventCallback {
                 val track: Track = it.track
-                Log.d("MainActivity", track.name + " by " + track.artist.name)
-                val infoMusic = track.name + " by " + track.artist.name
-                textView.text=infoMusic
+                Log.d("MainActivity", track.name + " par " + track.artist.name)
+                val infoMusic = track.name + " par " + track.artist.name //concaténation de l'artiste et du titre
+                infos.text=infoMusic //J'affiche le nom de la musique à chaque changement
+
+                //je fais une recherche
+                val trackMatch = musixMatch.getMatchingTrack(track.name, track.artist.name)
+                val data = trackMatch.track
+                //je recupere les parole à partir des donnée de la recherche
+                val trackID = data.trackId!!
+                val lyrics = musixMatch.getLyrics(trackID)
+
+                // Je récupère uniquement les paroles et je les affiche
+                val lyricsAffichable = lyrics.lyricsBody!!
+                lyricsDisplay.text=lyricsAffichable
+
             }
+        }
+        // Gestion des bouton play/pause, next, back
+        startButton.setOnClickListener {
+            val animation = AnimationUtils.loadAnimation(this, R.anim.slide_up) //je charge mon animation
+            infos.startAnimation(animation) //je démarre mon animation
+            spotifyAppRemote?.playerApi?.playerState?.setResultCallback { result ->
+                if (result.isPaused) {
+                    spotifyAppRemote?.let { it.playerApi.resume() }
+                } else
+                    spotifyAppRemote?.let { it.playerApi.pause() }
+                }
+        }
+        nextButton.setOnClickListener {
+            spotifyAppRemote?.let { it.playerApi.skipNext() }
+        }
+        backButton.setOnClickListener {
+            spotifyAppRemote?.let { it.playerApi.skipPrevious() }
         }
 
     }
