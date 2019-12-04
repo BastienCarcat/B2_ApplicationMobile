@@ -15,6 +15,8 @@ import androidx.core.app.ComponentActivity
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import org.jmusixmatch.MusixMatchException
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
@@ -61,15 +63,20 @@ class MainActivity : AppCompatActivity() {
                 infos.text=infoMusic //J'affiche le nom de la musique à chaque changement
 
                 //je fais une recherche
-                val trackMatch = musixMatch.getMatchingTrack(track.name, track.artist.name)
-                val data = trackMatch.track
-                //je recupere les parole à partir des donnée de la recherche
-                val trackID = data.trackId!!
-                val lyrics = musixMatch.getLyrics(trackID)
-
-                // Je récupère uniquement les paroles et je les affiche
-                val lyricsAffichable = lyrics.lyricsBody!!
-                lyricsDisplay.text=lyricsAffichable
+                try{
+                    Thread{
+                        val trackMatch = musixMatch.getMatchingTrack(track.name, track.artist.name)
+                        //je recupere les parole à partir des donnée de la recherche
+                        val lyrics = musixMatch.getLyrics(trackMatch.track.trackId)
+                        runOnUiThread{
+                            // Je récupère uniquement les paroles et je les affiche
+                            lyricsDisplay.text = "Paroles: " + lyrics.lyricsBody
+                        }
+                    }.start()
+                }
+                catch(e : Exception){
+                    throw  e
+                }
 
             }
         }
