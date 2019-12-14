@@ -7,7 +7,8 @@
     android:fitsSystemWindows="false"
     android:visibility="visible"
     tools:context=".MainActivity">
-    <com.google.android.flexbox.FlexboxLayout
+
+    <!-- <com.google.android.flexbox.FlexboxLayout
         android:layout_width="match_parent"
         android:layout_height="800dp"
         app:layout_anchor="@+id/flexboxLayout"
@@ -26,6 +27,18 @@
             android:layout_height="227dp"
             android:text="TextView"
             android:textAlignment="center" />
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:alignItems="center"
+        app:justifyContent="center">
+
+
+
+    </com.google.android.flexbox.FlexboxLayout>
+
     <com.google.android.flexbox.FlexboxLayout
         android:id="@+id/flexboxLayout"
         android:layout_width="fill_parent"
@@ -35,12 +48,45 @@
         app:flexDirection="column_reverse"
         app:justifyContent="center">
 
-        <com.google.android.flexbox.FlexboxLayout
+    </com.google.android.flexbox.FlexboxLayout>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="start"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/infos"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Title musique"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/lyricsDisplay"
+            android:layout_width="match_parent"
+            android:layout_height="551dp"
+            android:text="Parole musique"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="15dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="129dp"
+            android:gravity="center_horizontal"
             android:orientation="horizontal"
-            app:alignItems="center"
-            app:justifyContent="center">
+            android:textAlignment="center">
 
             <Button
                 android:id="@+id/backButton"
@@ -56,7 +102,7 @@
                 android:layout_height="120dp"
                 android:background="@drawable/play"
                 android:textAlignment="center"
-                android:textSize="60dp" />
+                android:textSize="100dp" />
 
             <Button
                 android:id="@+id/nextButton"
@@ -65,7 +111,8 @@
                 android:background="@drawable/next"
                 android:textAlignment="center"
                 android:textSize="100dp" />
+        </LinearLayout>
 
-        </com.google.android.flexbox.FlexboxLayout>
-    </com.google.android.flexbox.FlexboxLayout>
+    </LinearLayout>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
