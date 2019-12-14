@@ -3,7 +3,7 @@ This repository contains the code of the MobileApp project. Produced in 2019.
 
 ## How to Start
 ```
-git clone {URL Repository}
+git clone https://github.com/AugustinRibreau/B2_ApplicationMobile.git
 ```
 
 ## How to contribute
