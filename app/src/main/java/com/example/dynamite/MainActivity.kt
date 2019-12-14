@@ -1,5 +1,7 @@
 package com.example.dynamite;
 
+import android.annotation.SuppressLint
+import android.graphics.PorterDuff
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log;
@@ -15,6 +17,8 @@ import androidx.core.app.ComponentActivity
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.view.MotionEvent
+import android.view.View
 import org.jmusixmatch.MusixMatchException
 import java.lang.Exception
 
@@ -50,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    @SuppressLint("SetTextI18n")
     private fun connected() {
         val musixMatch = MusixMatch(apiKey)
         spotifyAppRemote?.let {
