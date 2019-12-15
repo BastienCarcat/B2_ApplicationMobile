@@ -1,32 +1,24 @@
 package com.example.dynamite;
 
 import android.annotation.SuppressLint
-import android.graphics.PorterDuff
-import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity
-import android.util.Log;
-import com.spotify.android.appremote.api.ConnectionParams;
-import com.spotify.android.appremote.api.Connector;
-import com.spotify.android.appremote.api.SpotifyAppRemote;
-import com.spotify.protocol.types.Track;
-import kotlinx.android.synthetic.main.activity_main.*
+import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
+import android.util.Log
 import android.view.animation.AnimationUtils
+import androidx.appcompat.app.AppCompatActivity
+import com.spotify.android.appremote.api.ConnectionParams
+import com.spotify.android.appremote.api.Connector
+import com.spotify.android.appremote.api.SpotifyAppRemote
+import com.spotify.protocol.types.Track
+import kotlinx.android.synthetic.main.activity_main.*
 import org.jmusixmatch.MusixMatch
-import org.jmusixmatch.entity.lyrics.Lyrics
-import androidx.core.app.ComponentActivity
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.view.MotionEvent
-import android.view.View
-import org.jmusixmatch.MusixMatchException
-import java.lang.Exception
+
 
 class MainActivity : AppCompatActivity() {
 
-    private val clientId = "111d8a20647a466cabf20bbb9363f347"
-    private val redirectUri = "com.example.dynamite://callback"
-    var apiKey = "c31a28b6305998f504e30ac76e2d5354"
+    private val clientId = "111d8a20647a466cabf20bbb9363f347" //Clé API Spotify
+    private val redirectUri = "com.example.dynamite://callback" //Url redirect Spotify DEv
+    var apiKey = "c31a28b6305998f504e30ac76e2d5354" //Clé API musixmatch
     private var spotifyAppRemote: SpotifyAppRemote? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,7 +50,7 @@ class MainActivity : AppCompatActivity() {
     private fun connected() {
         val musixMatch = MusixMatch(apiKey)
         spotifyAppRemote?.let {
-            val playlistURI = "spotify:playlist:1UPPptBf3XiBT2qcTAJzw7"
+            val playlistURI = "spotify:playlist:37i9dQZF1DWVuV87wUBNwc" //URL de la playlist à jouer
             it.playerApi.play(playlistURI)
             it.playerApi.toggleShuffle()
             it.playerApi.subscribeToPlayerState().setEventCallback {
@@ -71,11 +63,10 @@ class MainActivity : AppCompatActivity() {
                 try{
                     Thread{
                         val trackMatch = musixMatch.getMatchingTrack(track.name, track.artist.name)
-                        //je recupere les parole à partir des donnée de la recherche
-                        val lyrics = musixMatch.getLyrics(trackMatch.track.trackId)
+                        val lyrics = musixMatch.getLyrics(trackMatch.track.trackId) //je recupere les parole à partir des donnée de la recherche d'au dessus
                         runOnUiThread{
-                            // Je récupère uniquement les paroles et je les affiche
-                            lyricsDisplay.text = "Paroles: " + lyrics.lyricsBody
+                            lyricsDisplay.text = "Paroles: " + lyrics.lyricsBody // Je récupère uniquement les paroles et je les affiche
+                            lyricsDisplay.movementMethod = ScrollingMovementMethod() //Je permet de scroller dans le conteneur des paroles
                         }
                     }.start()
                 }
@@ -85,10 +76,11 @@ class MainActivity : AppCompatActivity() {
 
             }
         }
+
         // Gestion des bouton play/pause, next, back
         startButton.setOnClickListener {
             val animation = AnimationUtils.loadAnimation(this, R.anim.slide_up) //je charge mon animation
-            infos.startAnimation(animation) //je démarre mon animation
+            infos.startAnimation(animation) //je démarre mon animation sur le titre de la musique (quand je clique sur le bouton play)
             spotifyAppRemote?.playerApi?.playerState?.setResultCallback { result ->
                 if (result.isPaused) {
                     spotifyAppRemote?.let { it.playerApi.resume() }
@@ -102,7 +94,6 @@ class MainActivity : AppCompatActivity() {
         backButton.setOnClickListener {
             spotifyAppRemote?.let { it.playerApi.skipPrevious() }
         }
-
     }
 
     override fun onStop() {
@@ -110,6 +101,5 @@ class MainActivity : AppCompatActivity() {
         spotifyAppRemote?.let {
             SpotifyAppRemote.disconnect(it)
         }
-
     }
 }
