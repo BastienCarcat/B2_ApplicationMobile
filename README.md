@@ -19,7 +19,7 @@ Just send a pull-request 😉
 - The API Keys provided (Spotify and MusixMatch) work on any device, but with MusixMatch you can only make 2000 Api Calls per day and 500 Lyrics display per day.
 
 ## Useful Links
-- https://developer.musixmatch.com/plans
+- https://developer.musixmatch.com/documentation
 - https://github.com/sachin-handiekar/jMusixMatch
 - https://developer.spotify.com/documentation/android/quick-start/
 - https://spotify.github.io/android-sdk/app-remote-lib/docs/index.html
