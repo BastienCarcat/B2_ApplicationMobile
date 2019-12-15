@@ -1,5 +1,5 @@
 # Dynamite
-This repository contains the code of the MobileApp project. Produced in 2019.
+This repository contains the code of the MobileApp project. Produced in 2019.  
 The app is a simple spotify player with lyrics got from MusixMatch API.
 
 ## How to Start
