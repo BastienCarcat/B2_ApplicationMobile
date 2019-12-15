@@ -14,6 +14,8 @@ Just send a pull-request 😉
 ## Authors
 - <b>Augustin Ribreau</b> - <i>Developper</i> - <a href="https://augustin.ribreau.co/">augustin.ribreau.co</a>.
 - <b>Kévin Gillet</b> - <i>Developper</i> - <a href="https://www.linkedin.com/in/k%C3%A9vin-gillet-50b25b175/">Linkedin</a>.
+- <b>Gégoire Barre</b>
+- <b>Bastien Carcat</b>
 
 ## More Informations
 - To make this app working correctly you need spotify installed on your device and to be connected to an account (premium is better).
