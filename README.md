@@ -12,6 +12,12 @@ git clone https://github.com/AugustinRibreau/B2_ApplicationMobile.git
 - You need to create your own Spotify API Key (Check the useful links), and replace it in the "MainActivity.kt" at line 19;
 - The API Keys provided (Spotify and MusixMatch) work on any device, but with MusixMatch you can only make 2000 Api Calls per day and 500 Lyrics display per day;
 
+## Explanation of design choices
+- Dark background and light writing to see well in full sunlight;
+- Button shadow and sound on click for the user feedback;
+- Scrollable lyrics to read them easily -> improvable with auto scroll lyrics;
+- Responsive content adaptable to any devices;
+
 ## Useful Links
 - https://developer.musixmatch.com/documentation <- MusixMatch Official Site Documentation
 - https://github.com/sachin-handiekar/jMusixMatch <- MusixMatch Community Documentation by sachin-Handiekar
