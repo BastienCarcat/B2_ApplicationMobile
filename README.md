@@ -7,13 +7,13 @@ The app is a simple spotify player with lyrics got from MusixMatch API.
 git clone https://github.com/AugustinRibreau/B2_ApplicationMobile.git
 ```
 
-## More Informations
+## ❗️ More Informations ❗️
 - To make this app working correctly you need spotify installed on your device and to be connected to an account on it (premium is better);
-- You need to create your own Spotify API Key (Check the useful links), and replace it in the "MainActivity.kt" at line 19;
+- You need to create your own Spotify API Key (Check the useful links), and replace it in the "MainActivity.kt" at <a href="https://github.com/AugustinRibreau/B2_ApplicationMobile/blob/1a1c57649d7399ed10385640a617daac59f854be/app/src/main/java/com/example/dynamite/MainActivity.kt#L19" target="_blank">line 19</a>;
 - You need to add "com.example.dynamite://callback" as Redirect URL in Spotify Developper Dashboard (see usefull links);
 - The API Keys provided (Spotify and MusixMatch) work on any device, but with MusixMatch you can only make 2000 Api Calls per day and 500 Lyrics display per day;
 
-## Explanation of design choices
+## ✏️ Explanation of design choices
 - Dark background and light writing to see well in full sunlight;
 - Button shadow and sound on click for the user feedback;
 - Scrollable lyrics to read them easily -> improvable with auto scroll lyrics;
@@ -31,7 +31,7 @@ git clone https://github.com/AugustinRibreau/B2_ApplicationMobile.git
 Just send a pull-request 😉
 
 ## Authors
-- <b>Augustin Ribreau</b> - <i>Developper</i> - <a href="https://augustin.ribreau.co/">augustin.ribreau.co</a>.
+- <b>Augustin Ribreau</b> - <i>Developper</i> - <a href="https://www.linkedin.com/in/augustinribreau/">Linkedin</a>.
 - <b>Kévin Gillet</b> - <i>Developper</i> - <a href="https://www.linkedin.com/in/k%C3%A9vin-gillet-50b25b175/">Linkedin</a>.
-- <b>Gégoire Barre</b> - <i>Developper</i>
-- <b>Bastien Carcat</b> - <i>Developper</i>
+- <b>Gégoire Barre</b> - <i>Developper</i> - <a href="https://github.com/crolse">Github</a>.
+- <b>Bastien Carcat</b> - <i>Developper</i> - <a href="https://www.linkedin.com/in/bastien-carcat-1a8707175/">Linkedin</a>.
